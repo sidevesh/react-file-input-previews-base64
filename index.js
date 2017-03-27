@@ -52,8 +52,8 @@ export default class FileInputBase64PreviewComponent extends Component {
   render() {
     return (
       <div style={this.props.parentStyle}>
-        <label htmlFor={this.props.formName} style={this.props.labelStyle}>{this.props.labelText}</label>
-        {this.props.image_preview && this.state.image_objs_array.length!==0 &&
+        <label htmlFor={this.props.inputId} style={this.props.labelStyle}>{this.props.labelText}</label>
+        {this.props.imagePreview && this.state.image_objs_array.length!==0 &&
           <div style={this.props.imageContainerStyle} >
             {this.state.image_objs_array.map((img_obj) => {
               if(img_obj.type.split("/")[0] === "image") {
@@ -68,7 +68,8 @@ export default class FileInputBase64PreviewComponent extends Component {
           </div>
         }
         <input
-          name={this.props.formName}
+          name={this.props.inputName}
+          id={this.props.inputId}
           type="file"
           onChange={ this.handleFileChange.bind(this) }
           multiple={this.props.multiple}
@@ -88,9 +89,9 @@ export default class FileInputBase64PreviewComponent extends Component {
 FileInputBase64PreviewComponent.defaultProps = {
   callbackFunction: ()=>{},
   labelText: "File Upload",
-  useTapEventPlugin: true,
-  multiple: false,
-  image_preview: false,
+  useTapEventPlugin: false,
+  multiple: true,
+  imagePreview: true,
   accept: "*",
   imageContainerStyle: {
     display: "flex",
@@ -116,4 +117,21 @@ FileInputBase64PreviewComponent.defaultProps = {
   },
   buttonComponent: <button type="button">Attach</button>,
   nonPreviewComponent: <NonPreviewDefaultComponent />
+}
+
+FileInputBase64PreviewComponent.propTypes = {
+  inputName: React.PropTypes.string,
+  inputId: React.PropTypes.string,
+  callbackFunction: React.PropTypes.func,
+  labelText: React.PropTypes.string,
+  useTapEventPlugin: React.PropTypes.bool,
+  multiple: React.PropTypes.bool,
+  imagePreview: React.PropTypes.bool,
+  accept: React.PropTypes.string,
+  imageContainerStyle: React.PropTypes.object,
+  imageStyle: React.PropTypes.object,
+  labelStyle: React.PropTypes.object,
+  parentStyle: React.PropTypes.object,
+  buttonComponent: React.PropTypes.element,
+  nonPreviewComponent: React.PropTypes.element
 }
