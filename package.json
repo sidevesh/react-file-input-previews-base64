@@ -1,6 +1,6 @@
 {
   "name": "react-file-input-previews-base64",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This package provides an easy to use, ready to go and customizable wrapper around file input, with option for image previews and returning file as base64 string.",
   "main": "index.js",
   "scripts": {
