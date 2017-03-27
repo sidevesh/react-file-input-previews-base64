@@ -44,7 +44,7 @@ import FileInputComponent from 'react-file-input-previews-base64'
 | inputId | string | String passed to id prop of input and htmlFor tag of label components;if not present clicking on label won't trigger the file sector to show | none |
 | inputName | string | String passed to name prop of input, if not present using thi component as part of form will not work. | none |
 
-##Note
+## Note
 
 * onTouchTap is implmented by [react-tap-event-plugin](https://github.com/zilverline/react-tap-event-plugin) and is used in the amazing [material-ui](https://github.com/callemall/material-ui).
 * I am using this with material-ui library and the default props for styles follows the material design pattern. 
