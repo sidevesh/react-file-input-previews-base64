@@ -1,0 +1,29 @@
+{
+  "name": "react-file-input-previews-base64",
+  "version": "1.0.0",
+  "description": "This package provides an easy to use, ready to go and customizable wrapper around file input, with option for image previews and returning file as base64 string.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SiDevesh/react-file-input-previews-base64.git"
+  },
+  "keywords": [
+    "react",
+    "file",
+    "input",
+    "image",
+    "preview",
+    "base64",
+    "upload",
+    "form"
+  ],
+  "author": "SiDevesh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SiDevesh/react-file-input-previews-base64/issues"
+  },
+  "homepage": "https://github.com/SiDevesh/react-file-input-previews-base64#readme"
+}
