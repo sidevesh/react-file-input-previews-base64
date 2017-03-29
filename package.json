@@ -2,9 +2,13 @@
   "name": "react-file-input-previews-base64",
   "version": "1.0.1",
   "description": "This package provides an easy to use, ready to go and customizable wrapper around file input, with option for image previews and returning file as base64 string.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "babel": {
+    "presets": ["es2015", "react"]
   },
   "repository": {
     "type": "git",
@@ -25,5 +29,11 @@
   "bugs": {
     "url": "https://github.com/SiDevesh/react-file-input-previews-base64/issues"
   },
-  "homepage": "https://github.com/SiDevesh/react-file-input-previews-base64#readme"
+  "homepage": "https://github.com/SiDevesh/react-file-input-previews-base64#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-core": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0"
+  }
 }
