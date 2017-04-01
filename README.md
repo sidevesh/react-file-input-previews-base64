@@ -43,8 +43,8 @@ import FileInputComponent from 'react-file-input-previews-base64'
 | imageStyle | object | Object passed to style prop of image previews | {marginTop: 5, marginBottom: 5, marginRight: 5, width: "auto", height: "30vmin", boxShadow:"rgba(0, 0, 0, 0.188235) 0px 10px 30px, rgba(0, 0, 0, 0.227451) 0px 6px 10px"} |
 | parentStyle | object | Object passed to style prop of container div of whole component | {marginTop:14} |
 | labelStyle | object | Object passed to style prop of label | {fontSize: 16,color:'rgba(0, 0, 0, 0.298039)',display:'block'} |
-| inputId | string | String passed to id prop of input and htmlFor tag of label components;if not present clicking on label won't trigger the file sector to show | none |
-| inputName | string | String passed to name prop of input, if not present using thi component as part of form will not work. | none |
+| inputId | string | String passed to id prop of input and htmlFor tag of label components, if not present clicking on label won't trigger the file sector to show | none |
+| inputName | string | String passed to name prop of input, if not present, using this component as part of form will not work. | none |
 
 ## Note
 
