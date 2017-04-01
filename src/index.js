@@ -77,6 +77,32 @@ export default class FileInputBase64PreviewComponent extends Component {
           ref={(thisInput) => {this.fileInput = thisInput;}}
           style={{display:"none"}}
         />
+        {this.props.textBoxVisible &&
+          React.cloneElement(this.props.textFieldComponent,
+            this.props.useTapEventPlugin ?
+            {
+              onTouchTap: () => {this.simulateClickOnInput();},
+              value: this.state.image_objs_array.length === 1 ?
+              this.state.image_objs_array[0].name
+              :
+              this.state.image_objs_array.length === 0 ?
+              "No file selected"
+              :
+              this.state.image_objs_array.length+" files selected"
+            }
+            :
+            {
+              onClick: () => {this.simulateClickOnInput();},
+              value: this.state.image_objs_array.length === 1 ?
+              this.state.image_objs_array[0].name
+              :
+              this.state.image_objs_array.length === 0 ?
+              "No file selected"
+              :
+              this.state.image_objs_array.length+" files selected"
+            }
+          )
+        }
         {React.cloneElement(this.props.buttonComponent,
           this.props.useTapEventPlugin ? { onTouchTap: () => {this.simulateClickOnInput();} } : { onClick: () => {this.simulateClickOnInput();} }
         )}
@@ -92,6 +118,7 @@ FileInputBase64PreviewComponent.defaultProps = {
   useTapEventPlugin: false,
   multiple: true,
   imagePreview: true,
+  textBoxVisible: false,
   accept: "*",
   imageContainerStyle: {
     display: "flex",
@@ -116,7 +143,8 @@ FileInputBase64PreviewComponent.defaultProps = {
     marginTop: 14
   },
   buttonComponent: <button type="button">Attach</button>,
-  nonPreviewComponent: <NonPreviewDefaultComponent />
+  nonPreviewComponent: <NonPreviewDefaultComponent />,
+  textFieldComponent: <input type="text" />
 }
 
 FileInputBase64PreviewComponent.propTypes = {
@@ -127,11 +155,13 @@ FileInputBase64PreviewComponent.propTypes = {
   useTapEventPlugin: React.PropTypes.bool,
   multiple: React.PropTypes.bool,
   imagePreview: React.PropTypes.bool,
+  textBoxVisible: React.PropTypes.bool,
   accept: React.PropTypes.string,
   imageContainerStyle: React.PropTypes.object,
   imageStyle: React.PropTypes.object,
   labelStyle: React.PropTypes.object,
   parentStyle: React.PropTypes.object,
   buttonComponent: React.PropTypes.element,
-  nonPreviewComponent: React.PropTypes.element
+  nonPreviewComponent: React.PropTypes.element,
+  textFieldComponent: React.PropTypes.element
 }
