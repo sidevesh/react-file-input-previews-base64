@@ -45,6 +45,7 @@ import FileInputComponent from 'react-file-input-previews-base64'
 | labelStyle | object | Object passed to style prop of label | {fontSize: 16,color:'rgba(0, 0, 0, 0.298039)',display:'block'} |
 | inputId | string | String passed to id prop of input and htmlFor tag of label components, if not present clicking on label won't trigger the file sector to show | none |
 | inputName | string | String passed to name prop of input, if not present, using this component as part of form will not work. | none |
+| defaultFiles | array | Array consisting of urls of files to show as pre-selections, useful for edit forms, currently only supports urls to image files | [] |
 
 ## Note
 

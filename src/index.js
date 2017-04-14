@@ -53,9 +53,9 @@ export default class FileInputBase64PreviewComponent extends Component {
     return (
       <div style={this.props.parentStyle}>
         <label htmlFor={this.props.inputId} style={this.props.labelStyle}>{this.props.labelText}</label>
-        {this.props.imagePreview && this.state.image_objs_array.length!==0 &&
+        {this.props.imagePreview && ((this.state.image_objs_array.length!==0)||(this.props.defaultFiles.length!==0)) &&
           <div style={this.props.imageContainerStyle} >
-            {this.state.image_objs_array.map((img_obj) => {
+            {this.state.image_objs_array.length!==0 && this.state.image_objs_array.map((img_obj) => {
               if(img_obj.type.split("/")[0] === "image") {
                 return (
                   <img alt={img_obj.name} src={img_obj.base64} key={img_obj.name} style={this.props.imageStyle} />
@@ -64,6 +64,9 @@ export default class FileInputBase64PreviewComponent extends Component {
               else {
                 return React.cloneElement(this.props.nonPreviewComponent, {type: img_obj.type, size: img_obj.size, title: img_obj.name, key: img_obj.name});
               }
+            })}
+            {this.state.image_objs_array.length===0 && this.props.defaultFiles.map((img_url, index) => {
+              <img src={img_url} key={index} style={this.props.imageStyle} />
             })}
           </div>
         }
@@ -85,10 +88,13 @@ export default class FileInputBase64PreviewComponent extends Component {
               value: this.state.image_objs_array.length === 1 ?
               this.state.image_objs_array[0].name
               :
-              this.state.image_objs_array.length === 0 ?
-              "No file selected"
-              :
+              this.state.image_objs_array.length > 1 ?
               this.state.image_objs_array.length+" files selected"
+              :
+              this.props.defaultFiles.length === 0 ?
+              "No files selected"
+              :
+              "Leave empty to keep previous selection"
             }
             :
             {
@@ -96,10 +102,13 @@ export default class FileInputBase64PreviewComponent extends Component {
               value: this.state.image_objs_array.length === 1 ?
               this.state.image_objs_array[0].name
               :
-              this.state.image_objs_array.length === 0 ?
-              "No file selected"
-              :
+              this.state.image_objs_array.length > 1 ?
               this.state.image_objs_array.length+" files selected"
+              :
+              this.props.defaultFiles.length === 0 ?
+              "No files selected"
+              :
+              "Leave empty to keep previous selection"
             }
           )
         }
@@ -144,7 +153,8 @@ FileInputBase64PreviewComponent.defaultProps = {
   },
   buttonComponent: <button type="button">Attach</button>,
   nonPreviewComponent: <NonPreviewDefaultComponent />,
-  textFieldComponent: <input type="text" />
+  textFieldComponent: <input type="text" />,
+  defaultFiles: []
 }
 
 FileInputBase64PreviewComponent.propTypes = {
@@ -163,5 +173,6 @@ FileInputBase64PreviewComponent.propTypes = {
   parentStyle: React.PropTypes.object,
   buttonComponent: React.PropTypes.element,
   nonPreviewComponent: React.PropTypes.element,
-  textFieldComponent: React.PropTypes.element
+  textFieldComponent: React.PropTypes.element,
+  defaultFiles: React.PropTypes.array
 }
