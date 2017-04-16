@@ -66,7 +66,9 @@ export default class FileInputBase64PreviewComponent extends Component {
               }
             })}
             {this.state.image_objs_array.length===0 && this.props.defaultFiles.map((img_url, index) => {
-              <img src={img_url} key={index} style={this.props.imageStyle} />
+              return (
+                <img alt={"Preview "+index} src={img_url} key={index} style={this.props.imageStyle} />
+              );
             })}
           </div>
         }
