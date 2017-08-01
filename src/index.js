@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import NonPreviewDefaultComponent from './nonPreviewDefaultComponent';
 
 export default class FileInputBase64PreviewComponent extends Component {
@@ -160,21 +161,21 @@ FileInputBase64PreviewComponent.defaultProps = {
 }
 
 FileInputBase64PreviewComponent.propTypes = {
-  inputName: React.PropTypes.string,
-  inputId: React.PropTypes.string,
-  callbackFunction: React.PropTypes.func,
-  labelText: React.PropTypes.string,
-  useTapEventPlugin: React.PropTypes.bool,
-  multiple: React.PropTypes.bool,
-  imagePreview: React.PropTypes.bool,
-  textBoxVisible: React.PropTypes.bool,
-  accept: React.PropTypes.string,
-  imageContainerStyle: React.PropTypes.object,
-  imageStyle: React.PropTypes.object,
-  labelStyle: React.PropTypes.object,
-  parentStyle: React.PropTypes.object,
-  buttonComponent: React.PropTypes.element,
-  nonPreviewComponent: React.PropTypes.element,
-  textFieldComponent: React.PropTypes.element,
-  defaultFiles: React.PropTypes.array
+  inputName: PropTypes.string,
+  inputId: PropTypes.string,
+  callbackFunction: PropTypes.func,
+  labelText: PropTypes.string,
+  useTapEventPlugin: PropTypes.bool,
+  multiple: PropTypes.bool,
+  imagePreview: PropTypes.bool,
+  textBoxVisible: PropTypes.bool,
+  accept: PropTypes.string,
+  imageContainerStyle: PropTypes.object,
+  imageStyle: PropTypes.object,
+  labelStyle: PropTypes.object,
+  parentStyle: PropTypes.object,
+  buttonComponent: PropTypes.element,
+  nonPreviewComponent: PropTypes.element,
+  textFieldComponent: PropTypes.element,
+  defaultFiles: PropTypes.array
 }
