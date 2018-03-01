@@ -6,6 +6,7 @@ export default class FileInputBase64PreviewComponent extends Component {
 
   constructor(props) {
     super(props);
+    this.canvas = null;
     this.state = {
       image_objs_array: []
     }
@@ -23,6 +24,62 @@ export default class FileInputBase64PreviewComponent extends Component {
   handleFileChange(e) {
     let inp_files = e.target.files;
     let op_all_files = [];
+    let imgs = [];
+    let checkImgsLoad = (img, i) => {
+      imgs[i] = img;
+      for (let cursor = 0; cursor < inp_files.length; ++ cursor) {
+        if (!imgs[cursor]) {
+          return ;
+        }
+      }
+      if (!this.canvas) {
+        return ;
+      }
+      let canvas_ctx = this.canvas.getContext("2d");
+      let canvas_width = 0;
+      let canvas_height = 0;
+      if (this.props.fusion === "column") {
+        let max_width = 0;
+        imgs.forEach((img) => {
+          max_width = img.width > max_width ? img.width : max_width;
+          canvas_height += img.height;
+        });
+        canvas_width = max_width;
+      } else { // row
+        let max_height = 0;
+        imgs.forEach((img) => {
+          max_height = img.height > max_height ? img.height : max_height;
+          canvas_width += img.width;
+        });
+        canvas_height = max_height;
+      }
+      this.canvas.width = canvas_width;
+      this.canvas.height = canvas_height;
+      canvas_ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      let dstX = 0;
+      let dstY = 0;
+      imgs.forEach((img) => {
+        canvas_ctx.drawImage(img, dstX, dstY, img.width, img.height);
+        if (this.props.fusion === "column") {
+            dstY += img.height;
+        } else { // row
+            dstX += img.width;
+        }
+      });
+      let compositionB64 = this.canvas.toDataURL("image/png");
+      this.canvas.toBlob((blob) => {
+        let file = new File([blob], op_all_files[0].name);
+        let file_obj = {
+          name: op_all_files[0].name,
+          type: blob.type,
+          size: Math.round(blob.size / 1000),
+          base64: compositionB64,
+          file: file,
+        };
+        this.setState({image_objs_array: [file_obj]});
+        this.props.callbackFunction(file_obj);
+      }, "image/png");
+    };
     for (let i = 0; i < inp_files.length; i++) {
       let to_file = inp_files[i];
       let reader_obj = new FileReader();
@@ -36,12 +93,20 @@ export default class FileInputBase64PreviewComponent extends Component {
           file: to_file
         };
         op_all_files.push(to_file_obj);
+        if (this.props.fusion === "column" || this.props.fusion === "row") {
+            let img = new Image();
+            img.onload = () => {
+                checkImgsLoad(img, i);
+            };
+            img.src = to_file_obj.base64;
+        }
         if(op_all_files.length === inp_files.length) {
           if(this.props.multiple) {
-            this.setState({ image_objs_array: op_all_files });
-            this.props.callbackFunction(op_all_files);
-          }
-          else {
+            if (this.props.fusion !== "column" && this.props.fusion === "row") {
+              this.setState({image_objs_array: op_all_files});
+              this.props.callbackFunction(op_all_files);
+            }
+          } else {
             this.setState({ image_objs_array: op_all_files });
             this.props.callbackFunction(op_all_files[0]);
           }
@@ -118,6 +183,7 @@ export default class FileInputBase64PreviewComponent extends Component {
         {React.cloneElement(this.props.buttonComponent,
           this.props.useTapEventPlugin ? { onTouchTap: () => {this.simulateClickOnInput();} } : { onClick: () => {this.simulateClickOnInput();} }
         )}
+        <canvas ref={(canvas) => {this.canvas=canvas;}} style={{"display": "none"}} />
       </div>
     );
   }
@@ -129,6 +195,7 @@ FileInputBase64PreviewComponent.defaultProps = {
   labelText: "File Upload",
   useTapEventPlugin: false,
   multiple: true,
+  fusion: "row",
   imagePreview: true,
   textBoxVisible: false,
   accept: "*",
@@ -167,6 +234,7 @@ FileInputBase64PreviewComponent.propTypes = {
   labelText: PropTypes.string,
   useTapEventPlugin: PropTypes.bool,
   multiple: PropTypes.bool,
+  fusion: PropTypes.string,
   imagePreview: PropTypes.bool,
   textBoxVisible: PropTypes.bool,
   accept: PropTypes.string,
