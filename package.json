@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SiDevesh/react-file-input-previews-base64.git"
+    "url": "git+https://github.com/sidevesh/react-file-input-previews-base64.git"
   },
   "keywords": [
     "react",
