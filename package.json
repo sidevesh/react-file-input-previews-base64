@@ -27,12 +27,12 @@
     "upload",
     "form"
   ],
-  "author": "SiDevesh",
+  "author": "sidevesh",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SiDevesh/react-file-input-previews-base64/issues"
+    "url": "https://github.com/sidevesh/react-file-input-previews-base64/issues"
   },
-  "homepage": "https://github.com/SiDevesh/react-file-input-previews-base64#readme",
+  "homepage": "https://github.com/sidevesh/react-file-input-previews-base64#readme",
   "devDependencies": {
     "babel-cli": "^6.24.0",
     "babel-core": "^6.24.0",
